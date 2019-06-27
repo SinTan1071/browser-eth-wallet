@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>test wallet in html</title>
+</head>
+<body>
+    <div>
+        <button onclick="create()">创建新账户</button>
+    </div>
+    <div>
+        <button onclick="auth()">密码验证</button>
+    </div>
+    <div>
+        <button onclick="query()">查询以太币</button>
+    </div>
+    <div>
+        <button onclick="transact()">交易以太币</button>
+    </div>
+</body>
+<script src="../dist/browser-eth-wallet.min.js"></script>
+<script>
+    var keyObject = {
+        address: '6df0a1724cac1e1d82425066694c1fe633e949bf',
+        crypto: {
+            cipher: 'aes-128-ctr',
+            ciphertext: '430a6cde97217e43c0a19e3907a60ec9df07d5f3c2b39ffa4d8ee33811bdb8f0',
+            cipherparams: {
+                iv: 'b008e3eacdfc97f652466d510db904dc'
+            },
+            mac: 'a7132fd1beff669bfbc08a46be90b3f5674200604aff38a5c5d3e9b259fd8415',
+            kdf: 'pbkdf2',
+            kdfparams: {
+                c: 262144,
+                dklen: 32,
+                prf: 'hmac-sha256',
+                salt: 'f3976d6963d2fe48b2b8fcfae03d31476fe84452ea65d8a7b4bee51743b5a179'
+            }
+        },
+        id: 'ac452a7f-bc58-4298-b8e3-4bf070a86901',
+        version: 3
+    }
+    var toAddress = "7d9e28d55825de6db54a15d0657775273661d947"
+    var wal = new Wallet('https://rinkeby.infura.io/6e4c0183d45e45d681bc94da2b751801')
+    console.log("wallet web3 version", wal.web3.version)
+    function create() {
+        wal.createAccount('!@#123qwe').then(res => {
+            console.log("[createAccount] ---", res)
+        })
+    }
+    function auth() {
+        wal.passwordAuth('!@#123qwe', keyObject).then(res => {
+            console.log("[passwordAuth] ---", res)
+        })
+    }
+    function query() {
+        wal.getEthBalance('6df0a1724cac1e1d82425066694c1fe633e949bf').then(res => {
+            console.log("[getEthBalance] ---", res)
+        })
+    }
+    function transact() {
+        wal.passwordAuth('!@#123qwe', keyObject).then(res => {
+            wal.sendEthTransaction(keyObject.address, toAddress, 1.2, res).then(res => {
+                console.log("[sendEthTransaction] ---", res)
+            })
+        })
+    }
+</script>
+</html>
