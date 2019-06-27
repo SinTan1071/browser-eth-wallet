@@ -1,6 +1,6 @@
 {
   "name": "browser-eth-wallet",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "a ethereum wallet",
   "main": "index.js",
   "scripts": {
