@@ -133,14 +133,13 @@ wallet.passwordAuth(password, keyObject).then(res => {
 |:-------------------------|:----------------- |:----------------|:-----------------------------------|
 | words | 必传参数 | string | 用户的助记词 |
 | newpassword | 必传参数 | string | 用户的需要设置的新密码 |
-| keyObject | 必传参数 | object | 带有公钥地址的对象 |
 | Promise | 返回 | function | resolve一个Object，keyObject（带有公钥地址的对象） |
 
 ####  示例
 
 ```javascript
 // 助记词恢复账户
-wal.mnemonicRecover("aaa ddd ddddc casdc words", newpassword, keyObject).then(res=>{
+wal.mnemonicRecover("aaa ddd ddddc casdc words", newpassword).then(res=>{
     console.log("[keyObject] ---", res.keyObject)
 })
 ```
